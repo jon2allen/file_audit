@@ -15,6 +15,9 @@ OBJ_SUFFIX=.o
 
 all: linux macos windows
 
+freebsd:
+	$(CXX_LLVM) file_audit.cpp -std=c++17 -o $(TARGET)
+
 linux: $(TARGET)
 	
 macos: $(TARGET).llvm
