@@ -20,8 +20,15 @@ Licsnes is MIT.  Not sure about it.  The code looks like many of the examples ou
 
 
 Usage: ./file_audit --dir <directory> --csvfile <csv file> --type <file type>
+
+  
 Options:
+  
+  
   --dir <directory>   Specify the directory to scan recursively
+  
   --csvfile <csv file> Specify the output csv file name
+  
   --type <file type>   Specify the file extension type to filter - use .pdf not pdf - include
+  
   -h                   Show this help message and exit
