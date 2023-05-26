@@ -14,7 +14,7 @@ I glued pieces together.
 
 for details. took a few iterations to get it right.
 
-See blpg
+See blog
 https://www.jibsheet.net/linux/index.php/2023/05/24/chatgpt-creating-a-c-file-search-with-csv-output/
 
 Licsnes is MIT.  Not sure about it.  The code looks like many of the examples out on the internet.
