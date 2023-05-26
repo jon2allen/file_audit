@@ -19,7 +19,7 @@ Licsnes is MIT.  Not sure about it.  The code looks like many of the examples ou
 
 
 
-Usage: ./file_audit --dir <directory> --csvfile <csv file> --type <file type>
+#Usage: ./file_audit --dir <directory> --csvfile <csv file> --type <file type>
 
   
 Options:
