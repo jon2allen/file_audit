@@ -22,7 +22,7 @@ macos: $(TARGET).llvm
 windows: $(TARGET).exe
 
 $(TARGET): $(OBJ_FILES)
-	$(CXX) $(LFLAGS) $(OBJ_FILES) -o $(TARGET)
+	$(CXX) -sdt=c++17$(LFLAGS) $(OBJ_FILES) -o $(TARGET)
 
 $(TARGET).llvm: $(OBJ_FILES)
 	$(CXX_LLVM) $(LFLAGS) $(OBJ_FILES) -o $(TARGET)
