@@ -5,8 +5,11 @@ TARGET=file_audit
 
 SRC_FILES=file_audit.cpp 
 OBJ_FILES=$(patsubst %.cpp,%.o,$(SRC_FILES))
+OBJ_FILES_WIN=$(patsubst %.cpp,%.obj,$(SRC_FILES))
 
-CFLAGS=-c -Wall -O2
+CFLAGS=-c  -Wall -O2
+
+WINCFLAGS=/std:c++20
 
 OBJ_SUFFIX=.o
 
@@ -15,9 +18,6 @@ OBJ_SUFFIX=.o
 
 all: linux macos windows
 
-freebsd:
-	$(CXX_LLVM) file_audit.cpp -std=c++17 -o $(TARGET)
-
 linux: $(TARGET)
 	
 macos: $(TARGET).llvm
@@ -25,19 +25,19 @@ macos: $(TARGET).llvm
 windows: $(TARGET).exe
 
 $(TARGET): $(OBJ_FILES)
-	$(CXX) -sdt=c++17$(LFLAGS) $(OBJ_FILES) -o $(TARGET)
+	$(CXX) $(LFLAGS) $(OBJ_FILES) -o $(TARGET)
 
 $(TARGET).llvm: $(OBJ_FILES)
 	$(CXX_LLVM) $(LFLAGS) $(OBJ_FILES) -o $(TARGET)
 
-$(TARGET).exe: $(OBJ_FILES)
-	$(CXX_WIN) $(LFLAGS) $(OBJ_FILES) /Fe:$(TARGET).exe
+$(TARGET).exe: $(OBJ_FILES_WIN)
+	$(CXX_WIN) $(WINCFLAGS) $(OBJ_FILES_WIN) /Fe:$(TARGET).exe
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) $< -o $@
 
 %.obj: %.cpp
-	$(CXX_WIN) $(CFLAGS) $< /Fo$@
+	$(CXX_WIN) $(WINCFLAGS) $< /Fo$@
 
 install:
 	cp $(TARGET) /usr/local/bin/$(TARGET)

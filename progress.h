@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
+#ifdef _WIN32
+ // #include <unistd.h>
+#else
 #include <unistd.h>
+#endif
 
 class ProgressBar {
 public:
