@@ -28,6 +28,21 @@ public:
         }
         std::cout << "] " << percent << "%" << std::flush;
     }
+    //************
+    // call close to force 100% if needed
+    //
+    ////************
+    void close() {
+         int diff;
+         if ( current != total ) {
+             // std::cout << "status below 100%\n";
+         
+             diff = total - current;
+             update(diff);
+         }
+    }
+
+    
 
 private:
     int total;

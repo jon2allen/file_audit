@@ -6,6 +6,7 @@
 #include <fstream>
 #include <chrono>
 #include <iomanip>
+#include <cmath>
 #include "progress.h"
 
 
@@ -104,6 +105,7 @@ void write_csv(const string& dir, const string& csvfile, const string& type) {
     int num_found = 0;
     int num_search = 0;
     float percent = 0.0;
+    float amount = 0.0;
     ProgressBar bar(100);
     // Check if the file stream is open and ready
     if (ofs.is_open()) {
@@ -113,6 +115,15 @@ void write_csv(const string& dir, const string& csvfile, const string& type) {
         int file_count = std::distance(filesystem::recursive_directory_iterator(dir), filesystem::recursive_directory_iterator{});
         cout << "Total number of files in directory: " << file_count << endl;
         percent = file_count/100*1.0;
+        amount = percent * 100.0;
+        
+        // cout << " amount " << amount << endl;
+	if ( file_count - int(amount)   >  10  )
+	{
+            percent = percent + 1.0;
+            //  cout << "upping\n";
+        }
+        // cout << "calcualted percent" << percent << endl;
         for (const auto& entry : filesystem::recursive_directory_iterator(dir)) {
             num_search++;    
             // Chck if the entry is a regular file and has the given extension type
@@ -132,6 +143,7 @@ void write_csv(const string& dir, const string& csvfile, const string& type) {
                 ofs << "\"" << format_time(entry.last_write_time()) << "\"\n";
             }
         }
+        bar.close();
         // Close the file stream
         cout << "\nNumber of entires matched: " << num_found << endl; 
         ofs.close();
